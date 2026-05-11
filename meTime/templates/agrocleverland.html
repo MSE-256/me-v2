@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgroCleverland — Granjas Inteligentes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --cream:#f5f0e8;
+    --dark-green:#1a3d20;
+    --mid-green:#2d6a35;
+    --light-green:#4a9455;
+    --gold:#c8922a;
+    --gold-light:#e8b84b;
+    --text-dark:#0f1f10;
+    --text-mid:#3a5c3f;
+    --text-light:#6b8f6e;
+  }
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text-dark);overflow-x:hidden}
+
+  /* NAV */
+  nav{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 3rem;background:var(--dark-green);position:sticky;top:0;z-index:100}
+  .nav-brand{display:flex;align-items:center;gap:12px}
+  .nav-logo-circle{width:38px;height:38px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:14px;color:var(--dark-green)}
+  .nav-name{font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:#f5f0e8;letter-spacing:.5px}
+  .nav-name span{color:var(--gold-light)}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{color:rgba(245,240,232,.7);text-decoration:none;font-size:.85rem;font-weight:400;letter-spacing:.3px;transition:color .2s}
+  .nav-links a:hover{color:var(--gold-light)}
+  .nav-cta{background:var(--gold);color:var(--dark-green);padding:.55rem 1.4rem;border-radius:3px;font-size:.85rem;font-weight:500;text-decoration:none;letter-spacing:.3px;transition:background .2s}
+  .nav-cta:hover{background:var(--gold-light)}
+
+  /* HERO */
+  .hero{min-height:88vh;display:grid;grid-template-columns:1fr 1fr;gap:0;overflow:hidden}
+  .hero-left{background:var(--dark-green);padding:5rem 3.5rem 4rem;display:flex;flex-direction:column;justify-content:center;position:relative}
+  .hero-left::after{content:'';position:absolute;right:-60px;top:0;bottom:0;width:120px;background:var(--dark-green);clip-path:polygon(0 0,0 100%,100% 50%);z-index:1}
+  .hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(200,146,42,.15);border:1px solid rgba(200,146,42,.4);color:var(--gold-light);padding:.4rem 1rem;border-radius:2px;font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:2rem;width:fit-content}
+  .hero-tag::before{content:'';width:6px;height:6px;background:var(--gold-light);border-radius:50%;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .hero h1{font-family:'Playfair Display',serif;font-size:3.4rem;font-weight:900;line-height:1.1;color:#f5f0e8;margin-bottom:1.5rem}
+  .hero h1 em{font-style:normal;color:var(--gold-light)}
+  .hero-sub{color:rgba(245,240,232,.65);font-size:1rem;line-height:1.7;max-width:420px;margin-bottom:2.5rem;font-weight:300}
+  .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+  .btn-primary{background:var(--gold);color:var(--dark-green);padding:.8rem 2rem;border-radius:3px;font-weight:500;text-decoration:none;font-size:.9rem;letter-spacing:.3px;transition:all .2s;display:inline-block}
+  .btn-primary:hover{background:var(--gold-light);transform:translateY(-1px)}
+  .btn-outline{border:1px solid rgba(245,240,232,.3);color:#f5f0e8;padding:.8rem 2rem;border-radius:3px;font-weight:400;text-decoration:none;font-size:.9rem;letter-spacing:.3px;transition:all .2s;display:inline-block}
+  .btn-outline:hover{border-color:rgba(245,240,232,.7)}
+  .hero-stats{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(245,240,232,.1)}
+  .stat-num{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--gold-light)}
+  .stat-label{font-size:.75rem;color:rgba(245,240,232,.5);letter-spacing:.5px;margin-top:2px}
+
+  .hero-right{background:#e8e3d8;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .hero-visual{width:100%;height:100%;position:relative;display:flex;align-items:center;justify-content:center;padding:3rem}
+  .field-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;transform:perspective(800px) rotateX(25deg) rotateZ(-5deg);width:340px}
+  .field-cell{height:60px;border-radius:4px;position:relative;overflow:hidden}
+  .field-cell.grow{background:linear-gradient(180deg,#4a9455 0%,#2d6a35 100%)}
+  .field-cell.harvest{background:linear-gradient(180deg,#c8922a 0%,#8a6015 100%)}
+  .field-cell.soil{background:#6b5a3e}
+  .field-cell.water{background:#1a6b8a}
+  .sensor-dot{width:8px;height:8px;background:#e8b84b;border-radius:50%;position:absolute;top:6px;right:6px;animation:blink 1.5s infinite}
+  @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
+  .hero-overlay-card{position:absolute;bottom:2.5rem;right:2.5rem;background:var(--dark-green);border-radius:6px;padding:1rem 1.4rem;border-left:3px solid var(--gold)}
+  .hoc-label{font-size:.7rem;color:rgba(245,240,232,.5);letter-spacing:.8px;text-transform:uppercase}
+  .hoc-val{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold-light);font-weight:700;margin-top:2px}
+  .hero-overlay-card2{position:absolute;top:2.5rem;left:2rem;background:white;border-radius:6px;padding:.9rem 1.2rem;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+  .hoc2-row{display:flex;align-items:center;gap:8px}
+  .hoc2-icon{width:28px;height:28px;background:#eaf3de;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .hoc2-text{font-size:.75rem;color:#3a5c3f;font-weight:500}
+  .hoc2-sub{font-size:.65rem;color:#6b8f6e;margin-top:1px}
+
+  /* LOGOS */
+  .logos-strip{background:var(--dark-green);padding:1.2rem 3rem;display:flex;align-items:center;gap:3rem;overflow:hidden;border-top:1px solid rgba(255,255,255,.05)}
+  .logos-label{font-size:.7rem;color:rgba(245,240,232,.4);text-transform:uppercase;letter-spacing:1px;white-space:nowrap}
+  .logos-items{display:flex;gap:3rem;align-items:center}
+  .logo-item{font-family:'Playfair Display',serif;font-size:.85rem;color:rgba(245,240,232,.25);letter-spacing:.5px}
+
+  /* FEATURES */
+  .section{padding:5rem 3.5rem}
+  .section-eyebrow{font-size:.72rem;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:.8rem}
+  .section-title{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:900;color:var(--dark-green);line-height:1.15;margin-bottom:1rem}
+  .section-title em{font-style:normal;color:var(--light-green)}
+  .section-sub{color:var(--text-light);line-height:1.7;max-width:520px;font-size:.95rem}
+
+  .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;margin-top:3.5rem;background:rgba(42,82,42,.1);border:1.5px solid rgba(42,82,42,.1);border-radius:8px;overflow:hidden}
+  .feat-card{background:var(--cream);padding:2.2rem 2rem;transition:background .2s;cursor:default}
+  .feat-card:hover{background:#f0ebe0}
+  .feat-icon{width:48px;height:48px;background:var(--dark-green);border-radius:4px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:22px}
+  .feat-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--dark-green);margin-bottom:.7rem}
+  .feat-desc{font-size:.85rem;color:var(--text-light);line-height:1.6}
+  .feat-tag{display:inline-block;margin-top:1rem;font-size:.7rem;letter-spacing:.8px;text-transform:uppercase;color:var(--gold);font-weight:500}
+
+  /* METRICS */
+  .metrics-section{background:var(--dark-green);padding:5rem 3.5rem}
+  .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:3rem;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden}
+  .metric-card{background:var(--dark-green);padding:2.5rem 2rem;text-align:center;transition:background .2s}
+  .metric-card:hover{background:#1e4726}
+  .metric-num{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:var(--gold-light);line-height:1}
+  .metric-unit{font-size:1.2rem;color:var(--gold)}
+  .metric-label{font-size:.8rem;color:rgba(245,240,232,.5);letter-spacing:.5px;margin-top:.7rem;line-height:1.4}
+
+  /* HOW IT WORKS */
+  .how-section{padding:5rem 3.5rem;background:#ede8de}
+  .how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:3.5rem;position:relative}
+  .how-steps::before{content:'';position:absolute;top:28px;left:60px;right:60px;height:1px;background:repeating-linear-gradient(90deg,var(--dark-green) 0,var(--dark-green) 8px,transparent 8px,transparent 16px);opacity:.2}
+  .how-step{padding:0 1.5rem;text-align:center}
+  .step-num{width:56px;height:56px;border-radius:50%;background:var(--dark-green);color:var(--gold-light);font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;position:relative;z-index:1}
+  .step-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--dark-green);margin-bottom:.6rem}
+  .step-desc{font-size:.82rem;color:var(--text-light);line-height:1.6}
+
+  /* TECH STACK */
+  .tech-section{padding:5rem 3.5rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+  .tech-rings{width:320px;height:320px;position:relative;margin:0 auto}
+  .ring{position:absolute;border-radius:50%;border:1px solid}
+  .ring-1{width:100%;height:100%;border-color:rgba(42,106,53,.15);top:0;left:0}
+  .ring-2{width:74%;height:74%;border-color:rgba(42,106,53,.25);top:13%;left:13%}
+  .ring-3{width:48%;height:48%;border-color:rgba(42,106,53,.4);top:26%;left:26%;background:rgba(42,106,53,.05)}
+  .ring-center{width:22%;height:22%;border-radius:50%;background:var(--dark-green);top:39%;left:39%;position:absolute;display:flex;align-items:center;justify-content:center;font-size:18px}
+  .orbit-dot{position:absolute;width:44px;height:44px;background:white;border-radius:50%;border:1.5px solid rgba(42,82,42,.15);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+  .od1{top:-22px;left:calc(50% - 22px)}
+  .od2{right:-22px;top:calc(50% - 22px)}
+  .od3{bottom:-22px;left:calc(50% - 22px)}
+  .od4{left:-22px;top:calc(50% - 22px)}
+  .tech-list{display:flex;flex-direction:column;gap:1.5rem}
+  .tech-item{display:flex;gap:1.2rem;align-items:flex-start}
+  .tech-item-icon{width:42px;height:42px;background:rgba(42,106,53,.1);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px}
+  .tech-item-title{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--dark-green);margin-bottom:.3rem}
+  .tech-item-desc{font-size:.82rem;color:var(--text-light);line-height:1.5}
+
+  /* CTA */
+  .cta-section{background:var(--dark-green);padding:5rem 3.5rem;text-align:center;position:relative;overflow:hidden}
+  .cta-section::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;border:1px solid rgba(200,146,42,.1);top:-200px;left:50%;transform:translateX(-50%)}
+  .cta-section::after{content:'';position:absolute;width:900px;height:900px;border-radius:50%;border:1px solid rgba(200,146,42,.05);top:-350px;left:50%;transform:translateX(-50%)}
+  .cta-section h2{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:#f5f0e8;line-height:1.15;margin-bottom:1rem;position:relative;z-index:1}
+  .cta-section h2 em{font-style:normal;color:var(--gold-light)}
+  .cta-section p{color:rgba(245,240,232,.6);max-width:500px;margin:0 auto 2.5rem;line-height:1.7;position:relative;z-index:1;font-size:.95rem}
+  .cta-form{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+  .cta-input{padding:.8rem 1.5rem;border-radius:3px;border:1px solid rgba(245,240,232,.2);background:rgba(245,240,232,.07);color:#f5f0e8;font-size:.9rem;width:280px;outline:none;font-family:'DM Sans',sans-serif}
+  .cta-input::placeholder{color:rgba(245,240,232,.3)}
+  .cta-input:focus{border-color:rgba(200,146,42,.5)}
+
+  /* FOOTER */
+  footer{background:#0e2412;padding:3rem 3.5rem;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem}
+  .footer-brand .nav-name{font-size:1.3rem}
+  .footer-tagline{font-size:.8rem;color:rgba(245,240,232,.35);margin-top:.6rem;line-height:1.5;max-width:200px}
+  .footer-col-title{font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:rgba(245,240,232,.4);margin-bottom:1rem}
+  .footer-links{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+  .footer-links a{font-size:.82rem;color:rgba(245,240,232,.45);text-decoration:none;transition:color .2s}
+  .footer-links a:hover{color:var(--gold-light)}
+  .footer-bottom{background:#0b1d0f;padding:1.2rem 3.5rem;display:flex;justify-content:space-between;align-items:center}
+  .footer-copy{font-size:.72rem;color:rgba(245,240,232,.25)}
+  .footer-msc{font-size:.72rem;color:rgba(245,240,232,.25)}
+  .footer-msc span{color:var(--gold);font-weight:500}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-circle">ACL</div>
+    <span class="nav-name">Agro<span>Cleverland</span></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Plataforma</a></li>
+    <li><a href="#">Tecnología</a></li>
+    <li><a href="#">Resultados</a></li>
+    <li><a href="#">Casos</a></li>
+    <li><a href="#">Contacto</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Demo Gratuita</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">🌱 Granjas Inteligentes · M.S.C. Agency</div>
+    <h1>El campo del futuro<br>empieza <em>hoy</em></h1>
+    <p class="hero-sub">Combinamos sensores IoT, inteligencia artificial y análisis en tiempo real para que cada hectárea rinda al máximo con el mínimo de recursos.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn-primary">Comenzar ahora</a>
+      <a href="#" class="btn-outline">Ver demostración</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">38%</div>
+        <div class="stat-label">Aumento de rendimiento</div>
+      </div>
+      <div>
+        <div class="stat-num">52%</div>
+        <div class="stat-label">Reducción de agua</div>
+      </div>
+      <div>
+        <div class="stat-num">+400</div>
+        <div class="stat-label">Granjas conectadas</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="field-grid">
+        <div class="field-cell grow"><span class="sensor-dot"></span></div>
+        <div class="field-cell grow"><span class="sensor-dot"></span></div>
+        <div class="field-cell harvest"></div>
+        <div class="field-cell grow"><span class="sensor-dot"></span></div>
+        <div class="field-cell harvest"></div>
+        <div class="field-cell grow"><span class="sensor-dot"></span></div>
+        <div class="field-cell grow"><span class="sensor-dot"></span></div>
+        <div class="field-cell soil"></div>
+        <div class="field-cell water"></div>
+        <div class="field-cell grow"><span class="sensor-dot"></span></div>
+        <div class="field-cell harvest"></div>
+        <div class="field-cell grow"><span class="sensor-dot"></span></div>
+        <div class="field-cell grow"><span class="sensor-dot"></span></div>
+        <div class="field-cell soil"></div>
+        <div class="field-cell grow"><span class="sensor-dot"></span></div>
+        <div class="field-cell water"></div>
+      </div>
+      <div class="hero-overlay-card">
+        <div class="hoc-label">Rendimiento hoy</div>
+        <div class="hoc-val">+43.2%</div>
+      </div>
+      <div class="hero-overlay-card2">
+        <div class="hoc2-row">
+          <div class="hoc2-icon">💧</div>
+          <div>
+            <div class="hoc2-text">Riego automatizado</div>
+            <div class="hoc2-sub">Activado · Zona Norte</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="logos-strip">
+  <span class="logos-label">Integrado con</span>
+  <div class="logos-items">
+    <span class="logo-item">JOHN DEERE</span>
+    <span class="logo-item">TRIMBLE</span>
+    <span class="logo-item">CLAAS</span>
+    <span class="logo-item">AGCO</span>
+    <span class="logo-item">CNH INDUSTRIAL</span>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-eyebrow">Plataforma AgroCleverland</div>
+  <h2 class="section-title">Tecnología que <em>transforma</em><br>cada parcela</h2>
+  <p class="section-sub">Nuestra suite integrada conecta cada aspecto de tu granja — desde el suelo hasta la cosecha — en un único panel inteligente.</p>
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">🌡️</div>
+      <div class="feat-title">Monitoreo en tiempo real</div>
+      <p class="feat-desc">Red de sensores IoT distribuida en campo. Temperatura del suelo, humedad, pH y nutrientes actualizados cada 15 minutos.</p>
+      <span class="feat-tag">IoT · Sensores</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🧠</div>
+      <div class="feat-title">IA predictiva de cultivos</div>
+      <p class="feat-desc">Algoritmos entrenados con datos de +5 millones de hectáreas predicen rendimiento, plagas y condiciones ideales de cosecha.</p>
+      <span class="feat-tag">Machine Learning</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">💧</div>
+      <div class="feat-title">Riego de precisión</div>
+      <p class="feat-desc">Sistema automatizado que calcula la dosis exacta de agua por zona, reduciendo consumo hasta un 52% sin afectar el rendimiento.</p>
+      <span class="feat-tag">Automatización</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🛸</div>
+      <div class="feat-title">Drones agronómicos</div>
+      <p class="feat-desc">Flota de drones multiespectrales que mapea tu campo semanalmente, detectando estrés hídrico y enfermedades antes de que sean visibles.</p>
+      <span class="feat-tag">Teledetección</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📊</div>
+      <div class="feat-title">Panel de comando unificado</div>
+      <p class="feat-desc">Dashboard web y móvil con todos los KPIs de tu granja. Alertas inteligentes, reportes automáticos y acceso desde cualquier lugar.</p>
+      <span class="feat-tag">Analytics</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🌦️</div>
+      <div class="feat-title">Clima hiperlocal</div>
+      <p class="feat-desc">Integración con modelos meteorológicos de alta resolución. Planificación de tareas con pronósticos a 14 días por parcela.</p>
+      <span class="feat-tag">Meteorología</span>
+    </div>
+  </div>
+</section>
+
+<div class="metrics-section">
+  <div class="section-eyebrow" style="color:var(--gold)">Resultados comprobados</div>
+  <h2 class="section-title" style="color:#f5f0e8">Números que hablan<br><em style="color:var(--gold-light)">por sí solos</em></h2>
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div><span class="metric-num">38</span><span class="metric-unit">%</span></div>
+      <div class="metric-label">Aumento promedio<br>en rendimiento por ha</div>
+    </div>
+    <div class="metric-card">
+      <div><span class="metric-num">52</span><span class="metric-unit">%</span></div>
+      <div class="metric-label">Reducción en<br>consumo de agua</div>
+    </div>
+    <div class="metric-card">
+      <div><span class="metric-num">3.2</span><span class="metric-unit">×</span></div>
+      <div class="metric-label">Retorno de inversión<br>promedio en 18 meses</div>
+    </div>
+    <div class="metric-card">
+      <div><span class="metric-num">400</span><span class="metric-unit">+</span></div>
+      <div class="metric-label">Granjas conectadas<br>en Latinoamérica</div>
+    </div>
+  </div>
+</div>
+
+<section class="how-section">
+  <div class="section-eyebrow">Cómo funciona</div>
+  <h2 class="section-title">De la instalación<br>a los <em>resultados</em></h2>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="step-num">01</div>
+      <div class="step-title">Diagnóstico de campo</div>
+      <p class="step-desc">Análisis inicial de tu granja: suelo, cultivos, infraestructura y objetivos productivos.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-num">02</div>
+      <div class="step-title">Instalación IoT</div>
+      <p class="step-desc">Despliegue de sensores, gateways y conectividad. Sin obras. Instalación en 48 horas.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-num">03</div>
+      <div class="step-title">Activación de IA</div>
+      <p class="step-desc">La plataforma aprende los patrones de tu campo y comienza a generar recomendaciones en tiempo real.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-num">04</div>
+      <div class="step-title">Optimización continua</div>
+      <p class="step-desc">Con cada ciclo de cultivo el sistema mejora sus predicciones y automatizaciones.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tech-section">
+  <div class="tech-visual">
+    <div class="tech-rings">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="ring-center">🌾</div>
+      <div class="orbit-dot od1">📡</div>
+      <div class="orbit-dot od2">🤖</div>
+      <div class="orbit-dot od3">💻</div>
+      <div class="orbit-dot od4">🛸</div>
+    </div>
+  </div>
+  <div>
+    <div class="section-eyebrow">Tecnología de fondo</div>
+    <h2 class="section-title">Un ecosistema<br>completo de <em>datos</em></h2>
+    <div class="tech-list" style="margin-top:2rem">
+      <div class="tech-item">
+        <div class="tech-item-icon">📡</div>
+        <div>
+          <div class="tech-item-title">Conectividad LoRaWAN & 4G</div>
+          <p class="tech-item-desc">Red de largo alcance de bajo consumo que conecta cientos de sensores sin cableado ni costosas infraestructuras.</p>
+        </div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-item-icon">☁️</div>
+        <div>
+          <div class="tech-item-title">Procesamiento en la nube</div>
+          <p class="tech-item-desc">Infraestructura escalable que procesa terabytes de datos agronómicos con latencia mínima.</p>
+        </div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-item-icon">🔒</div>
+        <div>
+          <div class="tech-item-title">Datos 100% tuyos</div>
+          <p class="tech-item-desc">Encriptación de extremo a extremo. Tus datos agronómicos son confidenciales y nunca se comparten.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-section">
+  <h2>¿Listo para cultivar<br><em>más inteligente</em>?</h2>
+  <p>Agenda una demo personalizada y descubre cuánto puede mejorar tu granja con AgroCleverland.</p>
+  <div class="cta-form">
+    <input class="cta-input" type="email" placeholder="tu@granja.com">
+    <a href="#" class="btn-primary">Agendar demo →</a>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="nav-brand footer-brand">
+      <div class="nav-logo-circle">ACL</div>
+      <span class="nav-name">Agro<span>Cleverland</span></span>
+    </div>
+    <p class="footer-tagline">Granjas inteligentes para el campo latinoamericano del siglo XXI.</p>
+  </div>
+  <div>
+    <div class="footer-col-title">Plataforma</div>
+    <ul class="footer-links">
+      <li><a href="#">Monitoreo IoT</a></li>
+      <li><a href="#">IA predictiva</a></li>
+      <li><a href="#">Riego inteligente</a></li>
+      <li><a href="#">Drones</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-title">Empresa</div>
+    <ul class="footer-links">
+      <li><a href="#">Sobre nosotros</a></li>
+      <li><a href="#">Casos de éxito</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Prensa</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-title">Contacto</div>
+    <ul class="footer-links">
+      <li><a href="#">Agendar demo</a></li>
+      <li><a href="#">Soporte técnico</a></li>
+      <li><a href="#">Partners</a></li>
+      <li><a href="#">info@agrocleverland.com</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span class="footer-copy">© 2026 AgroCleverland. Todos los derechos reservados.</span>
+  <span class="footer-msc">Desarrollado por <span>M.S.C. Agency</span></span>
+</div>
+
+</body>
+</html>
