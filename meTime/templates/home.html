@@ -936,7 +936,7 @@
     <h2>Proyectos <em>gestionados &amp; desarrollados</em></h2>
   </div>
 
-  <!-- Proyectos PM (expandibles) -->
+  <!-- Proyectos PMD (expandibles) -->
   <div class="projects-grid">
 
     <div class="proj-card">
@@ -952,12 +952,21 @@
           <path d="M39 28 Q46 22 44 14 Q38 20 39 28Z" fill="#4a7a30"/>
         </svg>
       </div>
+      <!--
       <div class="proj-info">
         <h4>AgroCleverland</h4>
         <a href="%">AgroCleverland</a>
         <div class="proj-tag">Granjas inteligentes · IoT</div>
       </div>
     </div>
+      -->
+      <div class="proj-info">
+    <h4>AgroCleverland</h4>
+    <a href="{% url 'metime:agrocleverland' %}">Link</a>
+    <div class="proj-tag">
+        Granjas inteligentes · IoT
+    </div>
+</div>
 
     <div class="proj-card">
       <div class="proj-icon-wrap">
@@ -972,11 +981,22 @@
           <path d="M14 48 Q20 44 26 48 Q32 52 38 48 Q44 44 50 48" stroke="white" stroke-width="1.5" fill="none"/>
         </svg>
       </div>
+      <!--
       <div class="proj-info">
         <h4>Almar Resort</h4>
         <a href="%">AlmarResort</a>
         <div class="proj-tag">Lugar de campo · Eventos</div>
       </div>
+      -->
+      <div class="proj-info">
+    <h4>AlmarResort</h4>
+
+    <a href="{% url 'metime:almar' %}">Link</a>
+
+    <div class="proj-tag">
+        Eventos inolvidables
+    </div>
+</div>
     </div>
 
     <div class="proj-card">
@@ -989,11 +1009,23 @@
           <text x="32" y="25.5" text-anchor="middle" fill="white" font-size="5.5" font-weight="bold">LA MOLE</text>
         </svg>
       </div>
+      <!--
       <div class="proj-info">
         <h4>La Mole Bar</h4>
         <a href="%">LaMoleBar</a>
         <div class="proj-tag">Blockchain · Franquicia · F&B</div>
       </div>
+      -->
+      <div class="proj-info">
+    <h4>La Mole Bar</h4>
+
+    <a href="{% url 'metime:lamolebar' %}">Link</a>
+
+
+    <div class="proj-tag">
+        No es solo comida artesanal sino recuerdos inolvidables con amigos.
+    </div>
+</div>
     </div>
 
     <div class="proj-card">
@@ -1009,35 +1041,24 @@
           <circle cx="38" cy="26" r="2.5" fill="#c9a85a"/>
         </svg>
       </div>
+      <!--
       <div class="proj-info">
-        <h4>Edi-Style</h4>
-        <a href="%">Edi-Style</a>
+        <h4>Edi-Sales</h4>
+        <a href="%">Edi-Sales</a>
         <div class="proj-tag">Cosméticos · Kits · Retail</div>
       </div>
+      -->
+      <div class="proj-info">
+    <h4>Edi-Sales</h4>
+
+    <a href="{% url 'metime:edisales' %}">Link</a>
+    <div class="proj-tag">
+        Aqui encontraras lo que buscas.
+    </div>
+</div>
     </div>
 
-    <div class="proj-card">
-      <div class="proj-icon-wrap">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="32" cy="32" r="26" fill="none" stroke="#4a90d9" stroke-width="1.5"/>
-          <ellipse cx="32" cy="35" rx="11" ry="13" fill="#4a90d9"/>
-          <circle cx="27" cy="31" r="3.5" fill="white"/>
-          <circle cx="37" cy="31" r="3.5" fill="white"/>
-          <circle cx="27" cy="31" r="1.8" fill="#1e1e1e"/>
-          <circle cx="37" cy="31" r="1.8" fill="#1e1e1e"/>
-          <path d="M30 35.5 L32 38 L34 35.5Z" fill="white"/>
-          <rect x="23" y="20" width="18" height="4" rx="1" fill="#1e1e1e"/>
-          <rect x="29" y="16" width="6" height="5" rx="1" fill="#1e1e1e"/>
-          <line x1="37" y1="20" x2="42" y2="25" stroke="#f0a020" stroke-width="1.8"/>
-          <circle cx="42" cy="26" r="1.8" fill="#f0a020"/>
-        </svg>
-      </div>
-      <div class="proj-info">
-        <h4>Buho-Coop</h4>
-        <a href="%">Buho-Coop</a>
-        <div class="proj-tag">Cooperativa · Blockchain · Educación</div>
-      </div>
-    </div>
+
 <div class="proj-card">
       <div class="proj-icon-wrap">
         <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
@@ -1054,13 +1075,22 @@
           <circle cx="42" cy="26" r="1.8" fill="#f0a020"/>
         </svg>
       </div>
+      <!--
       <div class="proj-info">
         <h4>DATA-SPACE-MSC</h4>
         <a href="%">DataSpaceMSC</a>
         <div class="proj-tag">Ingeniería Aeroespacial</div>
       </div>
-    </div>
+      -->
+      <div class="proj-info">
+    <h4>Data-Space</h4>   
+    <a href="{% url 'metime:dataspace' %}">Link</a>
 
+
+    <div class="proj-tag">
+        UAV con propositos diferentes e Investigación.
+    </div>
+    </div>
   </div>
 
   <!-- Proyectos Dev -->

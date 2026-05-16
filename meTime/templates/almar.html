@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pirayu Camp — Campamento de Supervivencia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --verde: #2d5a27;
+    --verde-claro: #4a8c3f;
+    --tierra: #8b5e3c;
+    --amarillo: #d4a017;
+    --crema: #f5f0e8;
+    --oscuro: #1a2e1a;
+    --naranja: #c8622b;
+  }
+
+  body {
+    font-family: 'Josefin Sans', sans-serif;
+    background: var(--crema);
+    color: var(--oscuro);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--oscuro);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 3px solid var(--amarillo);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--amarillo);
+    letter-spacing: 2px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--crema);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.85;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .nav-links a:hover { color: var(--amarillo); opacity: 1; }
+  .nav-cta {
+    background: var(--naranja);
+    color: white !important;
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-weight: 600 !important;
+    opacity: 1 !important;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--oscuro);
+    min-height: 420px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(74,140,63,0.04) 20px,
+      rgba(74,140,63,0.04) 40px
+    );
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--naranja);
+    color: white;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    line-height: 0.9;
+    color: var(--crema);
+    letter-spacing: 2px;
+    margin-bottom: 0.75rem;
+  }
+  .hero h1 span { color: var(--amarillo); }
+  .hero-sub {
+    color: rgba(245,240,232,0.65);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 360px;
+    margin-bottom: 2rem;
+    letter-spacing: 0.5px;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--naranja);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: #b8521f; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--crema);
+    border: 1.5px solid rgba(245,240,232,0.35);
+    padding: 12px 24px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: border-color 0.2s, color 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--amarillo); color: var(--amarillo); }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero-emblem {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: rgba(45,90,39,0.2);
+    border: 2px solid rgba(212,160,23,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0;
+  }
+  .emblem-icon { font-size: 80px; }
+  .emblem-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 5px;
+    color: var(--amarillo);
+    margin-top: 8px;
+  }
+  .emblem-sub {
+    font-size: 11px;
+    color: rgba(245,240,232,0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .hero-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+  .tag {
+    background: rgba(74,140,63,0.25);
+    border: 1px solid rgba(74,140,63,0.4);
+    color: rgba(245,240,232,0.75);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+
+  /* STATS STRIP */
+  .stats-strip {
+    background: var(--verde);
+    padding: 1rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .stat-item {
+    text-align: center;
+    padding: 0.75rem 1rem;
+    border-right: 1px solid rgba(255,255,255,0.15);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--amarillo);
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(245,240,232,0.7);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* SECTION COMMON */
+  section { padding: 3rem 2.5rem; }
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--naranja);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    color: var(--verde);
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+  .divider {
+    width: 48px;
+    height: 3px;
+    background: var(--amarillo);
+    margin: 8px 0 2rem;
+  }
+
+  /* MODALIDADES */
+  .modalidades { background: var(--crema); }
+  .modalidades-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .modalidad-card {
+    background: white;
+    border: 1.5px solid rgba(45,90,39,0.12);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .modalidad-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(45,90,39,0.15);
+  }
+  .card-top {
+    padding: 1.5rem 1.25rem 1rem;
+    border-bottom: 1px solid rgba(45,90,39,0.08);
+  }
+  .card-icon { font-size: 36px; margin-bottom: 10px; display: block; }
+  .card-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    color: var(--oscuro);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .card-tagline {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.4;
+  }
+  .card-body { padding: 1rem 1.25rem; }
+  .card-details { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .card-details li {
+    font-size: 12px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.3px;
+  }
+  .card-details li::before {
+    content: '▸';
+    color: var(--verde-claro);
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+  .card-footer {
+    padding: 0.75rem 1.25rem;
+    background: rgba(45,90,39,0.04);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(45,90,39,0.08);
+  }
+  .price-tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--verde);
+  }
+  .price-tag span {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    color: #888;
+    font-weight: 400;
+    margin-left: 2px;
+  }
+  .card-btn {
+    background: var(--verde);
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .card-btn:hover { background: var(--verde-claro); }
+  .card-featured {
+    border-color: var(--naranja);
+    position: relative;
+  }
+  .card-featured::before {
+    content: 'MÁS POPULAR';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--naranja);
+    color: white;
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+
+  /* BOOKING */
+  .booking { background: var(--oscuro); color: var(--crema); }
+  .booking .section-title { color: var(--amarillo); }
+  .booking .section-eyebrow { color: rgba(245,240,232,0.6); }
+  .booking-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  /* CALENDAR */
+  .mini-cal {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .cal-header {
+    background: var(--verde);
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cal-month {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: var(--crema);
+  }
+  .cal-nav {
+    background: none;
+    border: none;
+    color: var(--amarillo);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0 4px;
+  }
+  .cal-body { padding: 12px; }
+  .cal-days-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    margin-bottom: 6px;
+  }
+  .cal-day-label {
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: rgba(245,240,232,0.4);
+    text-transform: uppercase;
+    padding: 4px 0;
+  }
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+  }
+  .cal-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: rgba(245,240,232,0.7);
+    transition: background 0.15s;
+    min-height: 28px;
+  }
+  .cal-cell:hover:not(.empty):not(.past) { background: rgba(74,140,63,0.3); color: var(--crema); }
+  .cal-cell.event { background: rgba(45,90,39,0.5); color: var(--amarillo); font-weight: 600; border: 1px solid rgba(74,140,63,0.5); }
+  .cal-cell.event:hover { background: rgba(74,140,63,0.7); }
+  .cal-cell.today { background: var(--naranja); color: white; font-weight: 600; }
+  .cal-cell.selected { background: var(--verde-claro); color: white; }
+  .cal-cell.past { opacity: 0.3; cursor: default; }
+  .cal-cell.empty { cursor: default; }
+  .cal-legend {
+    display: flex;
+    gap: 1rem;
+    padding: 8px 12px 10px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: rgba(245,240,232,0.55);
+  }
+  .legend-dot { width: 8px; height: 8px; border-radius: 2px; }
+
+  /* BOOKING FORM */
+  .booking-form { display: flex; flex-direction: column; gap: 14px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+    font-weight: 600;
+  }
+  .field input, .field select {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--crema);
+    padding: 10px 12px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 14px;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field input::placeholder { color: rgba(245,240,232,0.3); }
+  .field input:focus, .field select:focus { border-color: var(--verde-claro); }
+  .field select option { background: #1a2e1a; color: var(--crema); }
+  .submit-btn {
+    background: var(--naranja);
+    color: white;
+    border: none;
+    padding: 14px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 4px;
+  }
+  .submit-btn:hover { background: #b8521f; transform: translateY(-1px); }
+  .form-note {
+    font-size: 11px;
+    color: rgba(245,240,232,0.35);
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+
+  /* INCLUDES */
+  .includes { background: #f0ebe0; }
+  .includes-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  .include-item {
+    background: white;
+    border-radius: 8px;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    border: 1px solid rgba(45,90,39,0.1);
+    transition: transform 0.2s;
+  }
+  .include-item:hover { transform: translateY(-2px); }
+  .include-emoji { font-size: 32px; display: block; margin-bottom: 10px; }
+  .include-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    color: var(--oscuro);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .include-desc { font-size: 12px; color: #777; line-height: 1.4; }
+
+  /* LOCATION */
+  .location { background: var(--verde); color: var(--crema); }
+  .location .section-title { color: var(--crema); }
+  .location .section-eyebrow { color: rgba(245,240,232,0.6); }
+  .location-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  .map-placeholder {
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    height: 240px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .map-placeholder .map-icon { font-size: 48px; }
+  .map-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: var(--amarillo);
+  }
+  .map-coords { font-size: 12px; color: rgba(245,240,232,0.5); letter-spacing: 1px; }
+  .location-info { display: flex; flex-direction: column; gap: 1rem; }
+  .info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .info-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .info-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .info-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.45);
+    margin-bottom: 3px;
+  }
+  .info-val { font-size: 14px; color: var(--crema); line-height: 1.4; }
+
+  /* TESTIMONIOS */
+  .testimonios { background: var(--crema); }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .testi-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 1px solid rgba(45,90,39,0.1);
+    position: relative;
+  }
+  .testi-quote {
+    font-size: 48px;
+    line-height: 1;
+    color: rgba(45,90,39,0.12);
+    font-family: Georgia, serif;
+    position: absolute;
+    top: 10px;
+    left: 16px;
+  }
+  .testi-text {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #555;
+    padding-top: 24px;
+    margin-bottom: 1rem;
+  }
+  .testi-author { display: flex; align-items: center; gap: 10px; }
+  .testi-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .testi-name { font-weight: 600; font-size: 13px; color: var(--oscuro); }
+  .testi-role { font-size: 11px; color: #999; }
+  .stars { color: var(--amarillo); font-size: 12px; margin-bottom: 2px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--oscuro);
+    padding: 2rem 2.5rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 2rem;
+    border-top: 3px solid var(--verde);
+  }
+  .footer-brand p {
+    font-size: 12px;
+    color: rgba(245,240,232,0.45);
+    line-height: 1.6;
+    max-width: 260px;
+    margin-top: 8px;
+  }
+  .footer-links h4 {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.45);
+    margin-bottom: 10px;
+  }
+  .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .footer-links a {
+    font-size: 13px;
+    color: rgba(245,240,232,0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--amarillo); }
+  .footer-bottom {
+    background: rgba(0,0,0,0.3);
+    padding: 10px 2.5rem;
+    font-size: 11px;
+    color: rgba(245,240,232,0.3);
+    letter-spacing: 1px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-box {
+    background: var(--crema);
+    border-radius: 12px;
+    padding: 2.5rem;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    border-top: 4px solid var(--verde);
+  }
+  .modal-icon { font-size: 52px; margin-bottom: 12px; }
+  .modal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--verde);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .modal-msg { font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 1.5rem; }
+  .modal-close {
+    background: var(--verde);
+    color: white;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1.25rem; }
+    .hero h1 { font-size: 52px; }
+    .hero-visual { display: none; }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    .modalidades-grid,
+    .booking-grid,
+    .location-grid,
+    .testi-grid,
+    .includes-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; }
+    section { padding: 2rem 1.25rem; }
+    .footer-bottom { flex-direction: column; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVEGACIÓN -->
+<nav>
+  <span class="nav-logo">🌿 PIRAYU CAMP</span>
+  <ul class="nav-links">
+    <li><a href="#modalidades">Modalidades</a></li>
+    <li><a href="#incluye">Incluye</a></li>
+    <li><a href="#ubicacion">Ubicación</a></li>
+    <li><a href="#reserva" class="nav-cta">Reservar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-badge">⚡ Piraju, Paraguay</span>
+    <h1>SOBREVIVIR<br>ES UN <span>ARTE.</span></h1>
+    <p class="hero-sub">2 hectáreas de monte, fogatas reales, habilidades que nadie te enseña en el colegio. Aventura auténtica para jóvenes exploradores.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('reserva').scrollIntoView({behavior:'smooth'})">Reservar ahora</button>
+      <a href="#modalidades" class="btn-outline">Ver modalidades</a>
+    </div>
+    <div class="hero-tags">
+      <span class="tag">🏕️ Camping real</span>
+      <span class="tag">🔥 Fogata</span>
+      <span class="tag">🌿 Monte nativo</span>
+      <span class="tag">👨‍👩‍👧 Familias</span>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-emblem">
+      <span class="emblem-icon">🧭</span>
+      <span class="emblem-text">PIRAYU CAMP</span>
+      <span class="emblem-sub">Est. Piraju · 2 ha</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-num">2</div>
+    <div class="stat-label">Hectáreas de terreno</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">12+</div>
+    <div class="stat-label">Habilidades que aprender</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">5-18</div>
+    <div class="stat-label">Años recomendado</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">4</div>
+    <div class="stat-label">Km desde Piraju centro</div>
+  </div>
+</div>
+
+<!-- MODALIDADES -->
+<section id="modalidades" class="modalidades">
+  <div class="section-eyebrow">¿Cómo participar?</div>
+  <div class="section-title">Modalidades</div>
+  <div class="divider"></div>
+  <div class="modalidades-grid">
+
+    <div class="modalidad-card">
+      <div class="card-top">
+        <span class="card-icon">☀️</span>
+        <div class="card-name">Día Explorador</div>
+        <div class="card-tagline">Una jornada de actividades, sin pernoctar. Ideal para el primer contacto con la naturaleza.</div>
+      </div>
+      <div class="card-body">
+        <ul class="card-details">
+          <li>Duración: 8hs (8am – 5pm)</li>
+          <li>Orientación y lectura de mapas</li>
+          <li>Construcción de refugio básico</li>
+          <li>Taller de nudos y cuerdas</li>
+          <li>Almuerzo sobre fogata incluido</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <div class="price-tag">G 120.000 <span>/ persona</span></div>
+        <button class="card-btn" onclick="openBooking('Día Explorador')">Reservar</button>
+      </div>
+    </div>
+
+    <div class="modalidad-card card-featured">
+      <div class="card-top">
+        <span class="card-icon">🌙</span>
+        <div class="card-name">Noche Salvaje</div>
+        <div class="card-tagline">El paquete completo: acampan, se despiertan en el monte y conquistan la naturaleza.</div>
+      </div>
+      <div class="card-body">
+        <ul class="card-details">
+          <li>Duración: 2 días / 1 noche</li>
+          <li>Armado de carpa propia o alquilada</li>
+          <li>Prendido de fogata sin fósforos</li>
+          <li>Senderismo nocturno guiado</li>
+          <li>Desayuno de campamento incluido</li>
+          <li>Juegos de orientación Dora-style 🗺️</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <div class="price-tag">G 220.000 <span>/ persona</span></div>
+        <button class="card-btn" onclick="openBooking('Noche Salvaje')">Reservar</button>
+      </div>
+    </div>
+
+    <div class="modalidad-card">
+      <div class="card-top">
+        <span class="card-icon">🏕️</span>
+        <div class="card-name">Expedición Weekend</div>
+        <div class="card-tagline">El desafío máximo. Tres días para forjar exploradores de verdad.</div>
+      </div>
+      <div class="card-body">
+        <ul class="card-details">
+          <li>Duración: 3 días / 2 noches</li>
+          <li>Cocina de supervivencia completa</li>
+          <li>Plantas útiles del monte paraguayo</li>
+          <li>Mini olimpiadas de equipos</li>
+          <li>Diploma de Explorador al finalizar</li>
+          <li>Ideal para grupos y cumpleaños 🎉</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <div class="price-tag">G 380.000 <span>/ persona</span></div>
+        <button class="card-btn" onclick="openBooking('Expedición Weekend')">Reservar</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUÉ INCLUYE -->
+<section id="incluye" class="includes">
+  <div class="section-eyebrow">Siempre incluido</div>
+  <div class="section-title">El campamento completo</div>
+  <div class="divider"></div>
+  <div class="includes-grid">
+    <div class="include-item">
+      <span class="include-emoji">🔥</span>
+      <div class="include-name">Fogata & Cocina</div>
+      <div class="include-desc">Leña, piedras y guía de técnicas de fuego real</div>
+    </div>
+    <div class="include-item">
+      <span class="include-emoji">🗺️</span>
+      <div class="include-name">Kit Explorador</div>
+      <div class="include-desc">Mapa del terreno, brújula y cuaderno de misiones</div>
+    </div>
+    <div class="include-item">
+      <span class="include-emoji">🪢</span>
+      <div class="include-name">Taller de Nudos</div>
+      <div class="include-desc">Nudos esenciales con cuerda para llevar a casa</div>
+    </div>
+    <div class="include-item">
+      <span class="include-emoji">🧰</span>
+      <div class="include-name">Primeros Auxilios</div>
+      <div class="include-desc">Guía básica adaptada para niños y jóvenes</div>
+    </div>
+    <div class="include-item">
+      <span class="include-emoji">🛖</span>
+      <div class="include-name">Construcción Refugio</div>
+      <div class="include-desc">Aprenden a armar un techo con materiales del monte</div>
+    </div>
+    <div class="include-item">
+      <span class="include-emoji">🌿</span>
+      <div class="include-name">Flora Local</div>
+      <div class="include-desc">Recorrida guiada por el monte y plantas nativas</div>
+    </div>
+    <div class="include-item">
+      <span class="include-emoji">⭐</span>
+      <div class="include-name">Orientación Nocturna</div>
+      <div class="include-desc">Lectura del cielo y navegación bajo las estrellas</div>
+    </div>
+    <div class="include-item">
+      <span class="include-emoji">🎖️</span>
+      <div class="include-name">Diploma + Foto</div>
+      <div class="include-desc">Certificado de Explorador impreso y foto grupal</div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVA -->
+<section id="reserva" class="booking">
+  <div class="section-eyebrow">¡Es hora!</div>
+  <div class="section-title">Agendá tu expedición</div>
+  <div class="divider"></div>
+  <div class="booking-grid">
+
+    <div>
+      <p style="margin-bottom:12px; font-size:13px; color:rgba(245,240,232,0.6); letter-spacing:0.5px;">
+        Fechas disponibles resaltadas en el calendario
+      </p>
+      <div class="mini-cal">
+        <div class="cal-header">
+          <button class="cal-nav" onclick="prevMonth()">◀</button>
+          <div class="cal-month" id="calMonth">JUNIO 2025</div>
+          <button class="cal-nav" onclick="nextMonth()">▶</button>
+        </div>
+        <div class="cal-body">
+          <div class="cal-days-header">
+            <div class="cal-day-label">Do</div>
+            <div class="cal-day-label">Lu</div>
+            <div class="cal-day-label">Ma</div>
+            <div class="cal-day-label">Mi</div>
+            <div class="cal-day-label">Ju</div>
+            <div class="cal-day-label">Vi</div>
+            <div class="cal-day-label">Sa</div>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+        </div>
+        <div class="cal-legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#d4a017"></div> Fecha disponible
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#c8622b"></div> Hoy
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#4a8c3f"></div> Seleccionado
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="booking-form">
+      <div class="form-row">
+        <div class="field">
+          <label for="f-nombre">Nombre</label>
+          <input type="text" id="f-nombre" placeholder="Tu nombre" />
+        </div>
+        <div class="field">
+          <label for="f-ws">WhatsApp</label>
+          <input type="text" id="f-ws" placeholder="+595 9XX XXX XXX" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-mod">Modalidad</label>
+        <select id="f-mod">
+          <option value="">Seleccioná una opción...</option>
+          <option>Día Explorador — G 120.000</option>
+          <option>Noche Salvaje — G 220.000</option>
+          <option>Expedición Weekend — G 380.000</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="f-cant">N° de participantes</label>
+          <select id="f-cant">
+            <option>1 persona</option>
+            <option>2 personas</option>
+            <option>3-5 personas</option>
+            <option>6-10 personas</option>
+            <option>Grupo +10</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-fecha">Fecha elegida</label>
+          <input type="text" id="f-fecha" placeholder="Seleccioná en el cal." readonly />
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-carpa">¿Traen carpa propia?</label>
+        <select id="f-carpa">
+          <option>Sí, traemos nuestra carpa</option>
+          <option>No, necesitamos alquilar</option>
+          <option>No aplica (solo día)</option>
+        </select>
+      </div>
+      <button class="submit-btn" onclick="submitBooking()">🌿 Confirmar reserva</button>
+      <div class="form-note">Te confirmamos por WhatsApp en menos de 24 horas</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- UBICACIÓN -->
+<section id="ubicacion" class="location">
+  <div class="section-eyebrow">¿Dónde estamos?</div>
+  <div class="section-title">El territorio</div>
+  <div class="divider" style="background:var(--amarillo)"></div>
+  <div class="location-grid">
+    <div class="map-placeholder">
+      <div class="map-icon">📍</div>
+      <div class="map-label">Piraju, Paraguay</div>
+      <div class="map-coords">Coordenadas compartidas al reservar</div>
+      <div style="margin-top:12px;">
+        <a href="https://www.google.com/maps/search/Pirayu+Paraguay" target="_blank" class="btn-outline" style="font-size:12px; padding: 8px 16px;">Ver en Google Maps</a>
+      </div>
+    </div>
+    <div class="location-info">
+      <div class="info-row">
+        <span class="info-icon">🏞️</span>
+        <div>
+          <div class="info-label">Terreno</div>
+          <div class="info-val">2 hectáreas de monte nativo en Piraju, Paraguarí</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚗</span>
+        <div>
+          <div class="info-label">Acceso</div>
+          <div class="info-val">Camino de tierra accesible. Coordenadas exactas al confirmar reserva.</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div>
+          <div class="info-label">Distancia</div>
+          <div class="info-val">~70 km de Asunción vía Ruta 1, aprox. 1h 20min</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🌡️</span>
+        <div>
+          <div class="info-label">Mejor época</div>
+          <div class="info-val">Mayo a Septiembre (fresco y seco). Disponible todo el año.</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">📞</span>
+        <div>
+          <div class="info-label">Contacto directo</div>
+          <div class="info-val">WhatsApp: +595 9XX XXX XXX · Respuesta rápida garantizada</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testimonios">
+  <div class="section-eyebrow">Lo que dicen</div>
+  <div class="section-title">Exploradores que ya vivieron la aventura</div>
+  <div class="divider"></div>
+  <div class="testi-grid">
+
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">Mi hijo de 10 años no quería volver a casa. Aprendió a prender fuego, armar la carpa solo y cocinar arroz sobre brasas. Una experiencia que no olvidará jamás.</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:#e8f5e1; color:#3b6d11;">🧑</div>
+        <div>
+          <div class="testi-name">Ramón Giménez</div>
+          <div class="testi-role">Padre — Villarrica</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">Organizamos el cumpleaños de 15 de mi hija con el grupo de amigas. Fue completamente diferente a todo lo que habíamos visto. Las chicas están pidiendo repetir.</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:#faeeda; color:#854f0b;">👩</div>
+        <div>
+          <div class="testi-name">Lorena Aquino</div>
+          <div class="testi-role">Mamá — Asunción</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">Fuimos con el grupo scout del colegio. El lugar es hermoso, el equipo de guías excelente. Los chicos desconectaron del celular por primera vez en meses. Recomendadísimo.</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:#e6f1fb; color:#185fa5;">👨</div>
+        <div>
+          <div class="testi-name">Sebastián Barrios</div>
+          <div class="testi-role">Docente — San Lorenzo</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <span class="nav-logo" style="color:var(--amarillo); font-size:26px; display:block;">🌿 PIRAYU CAMP</span>
+    <p>Campamento de supervivencia en el corazón de Paraguarí. Donde los jóvenes aprenden que la naturaleza es el mejor maestro.</p>
+  </div>
+  <div class="footer-links">
+    <h4>Navegación</h4>
+    <ul>
+      <li><a href="#modalidades">Modalidades</a></li>
+      <li><a href="#incluye">¿Qué incluye?</a></li>
+      <li><a href="#reserva">Reservar</a></li>
+      <li><a href="#ubicacion">Ubicación</a></li>
+    </ul>
+  </div>
+  <div class="footer-links">
+    <h4>Contacto</h4>
+    <ul>
+      <li><a href="#">WhatsApp</a></li>
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Facebook</a></li>
+      <li><a href="#">Consultas grupales</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2025 Pirayu Camp · Piraju, Paraguarí, Paraguay</span>
+  <span>Hecho con ❤️ en el monte</span>
+</div>
+
+<!-- MODAL DE CONFIRMACIÓN -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <div class="modal-icon">🎖️</div>
+    <div class="modal-title">¡Reserva enviada!</div>
+    <p class="modal-msg">Recibimos tu solicitud. Te contactamos por WhatsApp en menos de 24 horas para confirmar disponibilidad y método de pago.</p>
+    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">Cerrar</button>
+  </div>
+</div>
+
+<script>
+  var currentYear = new Date().getFullYear();
+  var currentMonth = new Date().getMonth();
+  var selectedDate = null;
+
+  var monthNames = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
+
+  function getEventDays(year, month) {
+    var days = [];
+    var d = new Date(year, month, 1);
+    while (d.getMonth() === month) {
+      var dow = d.getDay();
+      if (dow === 6 || dow === 0) days.push(d.getDate());
+      d.setDate(d.getDate() + 1);
+    }
+    return days;
+  }
+
+  function renderCalendar() {
+    var grid = document.getElementById('calGrid');
+    var label = document.getElementById('calMonth');
+    label.textContent = monthNames[currentMonth] + ' ' + currentYear;
+    grid.innerHTML = '';
+
+    var firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    var today = new Date();
+    var eventDays = getEventDays(currentYear, currentMonth);
+
+    for (var i = 0; i < firstDay; i++) {
+      var empty = document.createElement('div');
+      empty.className = 'cal-cell empty';
+      grid.appendChild(empty);
+    }
+
+    for (var d = 1; d <= daysInMonth; d++) {
+      var cell = document.createElement('div');
+      var isToday = today.getDate() === d && today.getMonth() === currentMonth && today.getFullYear() === currentYear;
+      var cellDate = new Date(currentYear, currentMonth, d);
+      var todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      var isPast = cellDate < todayDate;
+      var isEvent = eventDays.indexOf(d) !== -1;
+      var isSelected = selectedDate && selectedDate.d === d && selectedDate.m === currentMonth && selectedDate.y === currentYear;
+
+      var cls = 'cal-cell';
+      if (isToday) cls += ' today';
+      else if (isPast) cls += ' past';
+      else if (isEvent) cls += ' event';
+      if (isSelected) cls += ' selected';
+
+      cell.className = cls;
+      cell.textContent = d;
+
+      if (!isPast) {
+        (function(day) {
+          cell.onclick = function() { selectDate(day); };
+        })(d);
+      }
+      grid.appendChild(cell);
+    }
+  }
+
+  function selectDate(d) {
+    selectedDate = { d: d, m: currentMonth, y: currentYear };
+    var monthLower = monthNames[currentMonth].charAt(0) + monthNames[currentMonth].slice(1).toLowerCase();
+    document.getElementById('f-fecha').value = d + ' de ' + monthLower + ' ' + currentYear;
+    renderCalendar();
+  }
+
+  function prevMonth() {
+    currentMonth--;
+    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    renderCalendar();
+  }
+
+  function nextMonth() {
+    currentMonth++;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    renderCalendar();
+  }
+
+  function openBooking(modalidad) {
+    var sel = document.getElementById('f-mod');
+    for (var i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].text.indexOf(modalidad) === 0) {
+        sel.selectedIndex = i;
+        break;
+      }
+    }
+    document.getElementById('reserva').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function submitBooking() {
+    var nombre = document.getElementById('f-nombre').value.trim();
+    var mod = document.getElementById('f-mod').value;
+    if (!nombre) { alert('Por favor ingresá tu nombre.'); return; }
+    if (!mod) { alert('Por favor seleccioná una modalidad.'); return; }
+    document.getElementById('modal').classList.add('active');
+  }
+
+  renderCalendar();
+</script>
+</body>
+</html>

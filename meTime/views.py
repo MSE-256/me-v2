@@ -26,3 +26,18 @@ def contact_view(request):
         form = ContactForm()
 
     return render(request, "contact.html", {"form": form, "success": success})
+
+def agrocleverland(request):
+    return render(request, 'agrocleverland.html')
+
+def almar(request):
+    return render(request, 'almar.html')
+
+def lamolebar(request):
+    return render(request, 'lamolebar.html')
+
+def edisales(request):
+    return render(request, 'edisales.html')
+
+def dataspace(request):
+    return render(request, 'dataspace.html')
