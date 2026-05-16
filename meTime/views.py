@@ -41,3 +41,6 @@ def edisales(request):
 
 def dataspace(request):
     return render(request, 'dataspace.html')
+
+def pystore(request):
+    return render(request, 'pystore.html')

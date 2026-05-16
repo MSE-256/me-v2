@@ -12,6 +12,7 @@ urlpatterns = [
     path('lamolebar/',views.lamolebar,name='lamolebar'),
     path('edisales/',views.edisales,name='edisales'),
     path('dataspace/',views.dataspace,name='dataspace'),
+    path('pystore/',views.pystore,name='pystore'),
 ]
 
 

@@ -775,7 +775,7 @@
     <li><a href="#about">Enfoque</a></li>
     <li><a href="#skills">Habilidades</a></li>
     <li><a href="#projects">Proyectos</a></li>
-    <li><a href="#content">Contenido</a></li>
+    <!--<li><a href="#content">Contenido</a></li>-->
     <li><a href="#contact" class="nav-cta">Contacto</a></li>
   </ul>
 </nav>
@@ -788,14 +788,14 @@
   <div class="hero-content">
     <div class="eyebrow">Diseñadora de ecosistemas interconectados(DEI)</div>
     <p class="hero-name">Marian Benitez</p>
-    <h1>Fusionando <em>Inteligencia artifical</em> y Diseño</h1>
+    <h1>Fusionando <em>Inteligencia artifical</em>; Diseño y Marketing</h1>
     <p class="hero-sub">
       Desarrollo con Python/Django, diseño productos centrados en personas y gestiono proyectos con visión estratégica.
       Tecnología que tiene sentido — desde la idea hasta el despliegue.
     </p>
     <div class="btn-group">
       <a href="#projects" class="btn-primary">Ver proyectos</a>
-      <a href="#content" class="btn-outline">Contenido &amp; divulgación</a>
+      <!--<a href="#content" class="btn-outline">Contenido &amp; divulgación</a>-->
     </div>
   </div>
 </section>
@@ -815,56 +815,229 @@
 </section>
 
 <!-- ════════ SKILLS ════════ -->
-<section id="skills">
+<section id="skills" class="vintage-letter">
+  <style>
+    #skills.vintage-letter {
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 60px 70px;
+      background: #fdf6e3;
+      background-image: 
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 31px,
+          rgba(139, 90, 43, 0.07) 31px,
+          rgba(139, 90, 43, 0.07) 32px
+        );
+      border: 1px solid #d4c5a9;
+      box-shadow: 
+        0 1px 1px rgba(0,0,0,0.15), 
+        0 10px 0 -5px #eee, 
+        0 10px 1px -4px rgba(0,0,0,0.15), 
+        0 20px 0 -10px #eee, 
+        0 20px 1px -9px rgba(0,0,0,0.15),
+        2px 2px 8px rgba(62, 39, 35, 0.15);
+      position: relative;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      color: #3e2723;
+      line-height: 32px;
+    }
+
+    /* Sello de cera decorativo */
+    #skills.vintage-letter::before {
+      content: '';
+      position: absolute;
+      top: 25px;
+      right: 40px;
+      width: 65px;
+      height: 65px;
+      background: radial-gradient(circle at 30% 30%, #c0392b, #8b2500);
+      border-radius: 50%;
+      box-shadow: 
+        inset -3px -3px 8px rgba(0,0,0,0.3),
+        2px 2px 5px rgba(0,0,0,0.2);
+      opacity: 0.85;
+      transform: rotate(-12deg);
+    }
+
+    #skills.vintage-letter::after {
+      content: 'SKILLS';
+      position: absolute;
+      top: 42px;
+      right: 47px;
+      font-size: 9px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: #f5deb3;
+      text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+      transform: rotate(-12deg);
+      font-family: 'Georgia', serif;
+    }
+
+    /* Fecha en esquina */
+    .letter-date {
+      text-align: right;
+      font-size: 13px;
+      font-style: italic;
+      color: #8b7355;
+      margin-bottom: 30px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Encabezado de sección */
+    #skills .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 25px;
+      border-bottom: 2px solid #c9b896;
+      position: relative;
+    }
+
+    #skills .section-header::after {
+      content: '✦';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fdf6e3;
+      padding: 0 15px;
+      color: #8b7355;
+      font-size: 16px;
+    }
+
+    #skills .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: #8b7355;
+      margin-bottom: 10px;
+      font-weight: normal;
+    }
+
+    #skills h2 {
+      font-size: 28px;
+      font-weight: normal;
+      color: #3e2723;
+      margin: 0;
+      letter-spacing: 0.5px;
+    }
+
+    #skills h2 em {
+      font-style: italic;
+      color: #6d4c41;
+      border-bottom: 1px dashed #a1887f;
+      padding-bottom: 2px;
+    }
+
+    /* Título del rol */
+    #skills h3 {
+      font-size: 16px;
+      font-weight: normal;
+      color: #5d4037;
+      text-align: center;
+      margin: 35px 0 30px 0;
+      font-style: italic;
+      letter-spacing: 0.3px;
+    }
+
+    /* Lista de habilidades */
+    #skills .skill-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 8px 30px;
+    }
+
+    #skills .skill-list li {
+      position: relative;
+      padding-left: 22px;
+      font-size: 14.5px;
+      color: #4e342e;
+      transition: all 0.3s ease;
+    }
+
+    #skills .skill-list li:hover {
+      color: #3e2723;
+      transform: translateX(4px);
+    }
+
+    #skills .skill-dot {
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 6px;
+      height: 6px;
+      background: #8b6914;
+      border-radius: 50%;
+      opacity: 0.7;
+    }
+
+    /* Firma decorativa al final */
+    .letter-signature {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 25px;
+      border-top: 1px solid #d7ccc8;
+      font-style: italic;
+      color: #8b7355;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    .letter-signature::before {
+      content: '~ ';
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      #skills.vintage-letter {
+        padding: 40px 25px;
+        margin: 30px 15px;
+      }
+      #skills h2 {
+        font-size: 22px;
+      }
+      #skills .skill-list {
+        grid-template-columns: 1fr;
+      }
+      #skills.vintage-letter::before,
+      #skills.vintage-letter::after {
+        display: none;
+      }
+    }
+  </style>
+
+  <div class="letter-date">Carta de presentación de habilidades</div>
+
   <div class="section-header">
     <div class="section-label">Conjunto de habilidades</div>
     <h2>Lo que traigo a <em>cada proyecto</em></h2>
   </div>
-  
-  <div class="skills-grid">
-    <!-- Primera columna -->
-    <div class="skill-col">
-      <div class="skill-col-header">
-        <div class="skill-col-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
-        </div>
-        <h3>Product Developer e IA Engineer (Project Manager) basado en diseño</h3>
-      </div>
-      <ul class="skill-list">
-        <li><span class="skill-dot"></span>Python (AI/ML)</li>
-        <li><span class="skill-dot"></span>Django &amp; REST Framework</li>
-        <li><span class="skill-dot"></span>PostgreSQL · SQL</li>
-        <li><span class="skill-dot"></span>Docker · Despliegue</li>
-        <li><span class="skill-dot"></span>APIs y microservicios</li>
-        <li><span class="skill-dot"></span>Product Design Methodology</li>
-        <li><span class="skill-dot"></span>Pensamiento crítico aplicado</li>
-        <li><span class="skill-dot"></span>Investigación y benchmarking</li>
-        <li><span class="skill-dot"></span>Figma · Wireframing</li>
-        <li><span class="skill-dot"></span>Visión de producto a largo plazo</li>
-      </ul>
-    </div>
 
-    <!-- Segunda columna (sin abrir otro skills-grid) -->
-    <div class="skill-col">
-      <div class="skill-col-header">
-        <div class="skill-col-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
-          </svg>
-        </div>
-        <h3>Divulgadora, Escritora &amp; Marketera</h3>
-      </div>
-      <ul class="skill-list">
-        <li><span class="skill-dot"></span>Creación de contenido YouTube</li>
-        <li><span class="skill-dot"></span>Redacción técnica y creativa</li>
-        <li><span class="skill-dot"></span>Estrategias de marketing digital</li>
-        <li><span class="skill-dot"></span>Marketing de afiliados</li>
-        <li><span class="skill-dot"></span>Oratoria y enseñanza</li>
-      </ul>
-    </div>
-  </div>
+  <h3>Product Developer e IA Engineer (Project Manager) basado en diseño</h3>
+
+  <ul class="skill-list">
+    <li><span class="skill-dot"></span>Python (AI/ML)</li>
+    <li><span class="skill-dot"></span>Django &amp; REST Framework</li>
+    <li><span class="skill-dot"></span>PostgreSQL · SQL</li>
+    <li><span class="skill-dot"></span>Docker · Despliegue</li>
+    <li><span class="skill-dot"></span>APIs y microservicios</li>
+    <li><span class="skill-dot"></span>Product Design Methodology</li>
+    <li><span class="skill-dot"></span>Pensamiento crítico aplicado</li>
+    <li><span class="skill-dot"></span>Investigación y benchmarking</li>
+    <li><span class="skill-dot"></span>Figma · Wireframing</li>
+    <li><span class="skill-dot"></span>Visión de producto a largo plazo</li>
+    <li><span class="skill-dot"></span>Creación de contenido YouTube</li>
+    <li><span class="skill-dot"></span>Redacción técnica y creativa</li>
+    <li><span class="skill-dot"></span>Estrategias de marketing digital</li>
+    <li><span class="skill-dot"></span>Marketing de afiliados</li>
+    <li><span class="skill-dot"></span>Oratoria y enseñanza</li>
+  </ul>
+
+  <div class="letter-signature">A su entera disposición</div>
 </section>
 
 <!-- ════════ PROJECTS ════════ -->
@@ -1028,14 +1201,14 @@
   <!-- Tarjeta 4 -->
   <div class="project-card">
     <div class="project-content">
-      <h4>Edi-Sales</h4>
+      <h4>PyStore</h4>
       <div class="proj-tag">
         <span class="tag-icon">🛒</span>
         Aquí encontrarás lo que buscas.
       </div>
       <p class="proj-desc">Plataforma de e-commerce intuitiva y rápida.</p>
     </div>
-    <a href="{% url 'metime:edisales' %}" class="project-btn">
+    <a href="{% url 'metime:pystore' %}" class="project-btn">
       Ver proyecto
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -1054,6 +1227,23 @@
       <p class="proj-desc">Drones y tecnología aeroespacial aplicada.</p>
     </div>
     <a href="{% url 'metime:dataspace' %}" class="project-btn">
+      Ver proyecto
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+  <!-- Tarjeta 6 -->
+  <div class="project-card">
+    <div class="project-content">
+      <h4>Digital Letter-Edisales</h4>
+      <div class="proj-tag">
+        <span class="tag-icon">🛸</span>
+        UAV con propósitos diferentes e Investigación.
+      </div>
+      <p class="proj-desc">Drones y tecnología aeroespacial aplicada.</p>
+    </div>
+    <a href="{% url 'metime:edisales' %}" class="project-btn">
       Ver proyecto
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -1097,42 +1287,6 @@
   </div>
 </section>
 
-<!-- ════════ CONTENT ════════ -->
-<section id="content">
-  <div class="section-header">
-    <div class="section-label">Divulgación</div>
-    <h2>Contenido, educación <em>y escritura</em></h2>
-  </div>
-
-  <div class="content-grid">
-    <div class="content-card">
-      <div class="cc-icon red">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z" fill="#cc2200"/>
-          <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/>
-        </svg>
-      </div>
-      <div>
-        <h3>Canal de YouTube</h3>
-        <p>Filosofía aplicada a la tecnología y la vida diaria. Pensamiento crítico hecho accesible para todos.</p>
-        <a href="https://www.youtube.com/@marianbenitez256" class="cc-link yt" target="_blank">Visitar canal →</a>
-      </div>
-    </div>
-
-    <div class="content-card">
-      <div class="cc-icon teal">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke="#3d7a72" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div>
-        <h3>Escritura &amp; Estrategia de Marketing</h3>
-        <p>Artículos técnicos, ensayos y contenido de alto impacto. Actualmente desarrollando mi plan de marketing digital y afiliación.</p>
-        <a href="https://medium.com/@dthbenitez97_58745/is-the-descentralization-with-blockchain-will-come-66eaecf7ed66" class="cc-link tl" target="_blank">Ver artículos →</a>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ════════ CONTACT ════════ -->
 <section id="contact">
@@ -1141,9 +1295,9 @@
       <div class="section-label">Trabajemos juntos</div>
       <h2>¿Tenés un proyecto en <em>mente</em>?</h2>
       <ul class="contact-info">
-        <li><span class="ci-dot"></span>masoledith77@gmail.com</li>
-        <li><span class="ci-dot"></span>0986-436-748</li>
-        <li><span class="ci-dot"></span>@marianbenitez256</li>
+        <li><a href="mailto:masoledith77@gmail.com">Enviar correo</a></li>
+        <li><a href="https://wa.me/595981234567">Enviar mensaje</a></li>
+        <li><a href="https://instagram.com/marianbenitez256">Instagram</a></li>
         <li><span class="ci-dot"></span>Asunción, Paraguay</li>
       </ul>
     </div>
